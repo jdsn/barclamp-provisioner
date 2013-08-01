@@ -245,11 +245,13 @@ hardware_install () {
     nuke_everything
     walk_node_through $HOSTNAME hardware-installing hardware-installed
     nuke_everything
+    wait_for_pxe_file "present"
     walk_node_through $HOSTNAME installing
 }
 
 hwupdate () {
     walk_node_through $HOSTNAME hardware-updating hardware-updated
+    wait_for_pxe_file "absent"
 }
 
 case $DHCP_STATE in
